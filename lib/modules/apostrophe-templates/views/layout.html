@@ -1,0 +1,101 @@
+{% extends data.outerLayout %}
+{% import 'macros/nav.html' as nav %}
+{% import 'global/svg/toolbox.html' as tool %}
+
+
+{% block beforeMain %}
+  <!--<div class="demo-modal">
+    <div class="demo-modal-content">
+      <img src="/images/demo-computer.svg" alt="ApostropheCMS Demo Site">
+      <h4>Welcome to the Apostrophe Demo</h4>
+      <p><strong>Just click on text to edit it.</strong> There is no save button because <strong>your edits are saved automatically.</strong></p>
+      <p>To add images, slideshow and more <strong>click the "+" icons</strong> that appear when you hover the mouse over the page.</p>
+      <p>Be sure to visit the "blog" and "default" pages, and try clicking "Page Menu" to create new subpages.</p>
+      <p>Have fun!</p>
+      <button>Let's Get Started</button>
+    </div>
+  </div>-->
+  <div class="off-canvas-container">
+    {{ nav.nav(data, {classes: 'off-canvas-nav hide-desktop', logo: true, showChildren: true}) }}
+  </div>
+  <div class="block top">
+      <div class="inner demo-inner">
+        <header>
+          
+          {{ nav.nav(data, {classes: 'hide-mobile'}) }}
+          <a href="#" class="off-canvas-trigger hide-desktop">
+            <svg class="a-toolbox">
+              {{ tool.icon() }}
+            </svg>
+          </a>
+
+        </header>
+      {% block headerContent %}
+      {% endblock %}
+    </div>
+  </div>
+  <div class="block header {% block upperClass %}{% endblock %}">
+    {% block headerBackground %}{% endblock %}
+
+  </div>
+{% endblock %}
+
+{% block main %}
+  {% block mainContent %}
+  {% endblock %}
+{% endblock %}
+
+{% block afterMain %}
+  <footer class="block footer">
+    <div class="inner">
+      {% block footerContent %}
+	     <div class="inline-middle width-25">
+	  	
+		    <img class="demo-apos-lockup" src="/images/demo_logo_apos_lockup.png" alt="Apostrophe" style="height: 74px;width:auto;">
+		
+		</div>
+		 <div class="inline-middle width-25">
+	  	 <h5>Contact</h5>
+		 <p>1600 Walnut Street, 2nd Floor</br>
+           Philadelphia, PA 19103
+		 </p>
+		</div>
+		<div class="inline-middle width-25">
+	  	<!--<nav class="demo-nav{% if options.classes%} {{options.classes}}{% endif%}">-->
+		<h5>Menu</h5> 
+		<nav class="footer_nav">
+		
+           <ul style="padding: 0px 0px 0px 0px;">
+	    
+	    {% for tab in data.home._children %}
+	      <li class="nav-item">
+	        <a style="color:#ea4339" href="{{ tab._url }}" class="{% if tab._id == data.page._id %}active{% endif %}">{{ tab.title }}</a>
+	      </li>
+	    {% endfor %}
+		 
+	       
+	  </ul>
+        </nav>
+		</div>
+		
+		
+        <div class="inline-middle width-16">
+          © 2017 Site.
+        </div>{#
+      #}
+		
+      {% endblock %}
+    </div>
+    
+  </footer>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-496991-33', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+{% endblock %}

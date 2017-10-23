@@ -1,0 +1,107 @@
+{% extends 'apostrophe-templates:layout.html' %}
+
+{% block bodyClass %}{{ super() }} home-page{% endblock %}
+{% block title %}Apostrophe Sandbox: {{ data.page.title | e }}{% endblock %}
+
+{% block main %}
+  <div class="block content banner">
+    <div class="inner">
+      <div class="demo-pageheader">
+        <!--<img class="demo-apos-lockup pageheader-logo" src="/images/demo_logo_apos_lockup.png" alt="Apostrophe">-->
+         
+        {{ apos.area(data.page, 'homepageText', {
+          widgets: {
+            'apostrophe-rich-text': {
+              toolbar: [ 'Styles', 'Bold', 'Italic', 'Blockquote', 'Link', 'Anchor', 'Unlink', 'BulletedList' ],
+              styles: [
+                { name: 'Title', element: 'h3' },
+                { name: 'Paragraph', element: 'p' }
+              ]
+            },
+            'apostrophe-images': {
+              minSize: [ 700, 350 ],
+              aspectRatio: [ 2, 1 ],
+              size: 'full'
+            },
+            'apostrophe-video': {}
+            }
+        }) }}
+      </div>
+    </div>
+	
+	<div class="inner" style="background-color: #c0c1e0;">
+      <div class="demo-pageheader" style=" margin-top: 0rem;">
+	  <div class="schedule_div" style="padding: 10px 10px 10px 10px; background-color: #c0c1e0; text-align: center;">
+	   <p><h5>Schedule Service</h5></p>
+	  <p id="show_p" style="cursor: pointer;" onclick="showscheduleform();">Click to show <img src="/images/schedule-close.png" alt="" class="active"></p>
+	  <p id="hide_p" style="display:none;cursor: pointer;" onclick="hidescheduleform();">Click to Hide <img src="/images/schedule-close.png" alt="" class="active"></p>
+	  </div>
+	  <div id="schudle_div" style="display:none; background-color: #c0c1e0; text-align: center;">
+           {{
+			apos.area(data.page, 'body', {
+			  widgets: {
+				'schedule-form': {}
+			  }
+			})
+		  }}
+		</div>   
+		   
+    </div>  
+    </div>
+	<script>
+	function showscheduleform()
+		{
+			$("#schudle_div").show();
+			$("#hide_p").show();
+			$("#show_p").hide();
+			
+		} 
+		function hidescheduleform()
+		{
+			$("#schudle_div").hide();
+			$("#hide_p").hide();
+			$("#show_p").show();
+		} 
+	</script>
+	
+  
+  </div>
+
+  <div class="block">
+    <div class="inner">
+       {{ apos.singleton(data.page, 'blogWidget', 'apostrophe-blog' ) }} 
+	   
+    </div>
+	
+  </div>
+  <div class="block">
+    <div class="inner">
+	<!--<a class="twitter-timeline" data-link-color="#ff0000" data-border-color="#00ff00" data-tweet-limit="5" data-chrome="nofooter noscrollbar" href="https://twitter.com/twitsnationHOU/lists/events-attractions" data-tweet-limit="5" data-widget-id="922175967811993601">Tweets by @twitsnationHOU</a>-->
+	
+	
+	
+<a class="twitter-timeline" data-tweet-limit="4" data-link-color="#ff0000" href="https://twitter.com/twitsnationHOU/lists/events-attractions?ref_src=twsrc%5Etfw">A Twitter List by twitsnationHOU</a> 
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>  
+<script>
+ window.setTimeout(function() {
+     /*$(".twitter-timeline").contents().find(".e-entry-title").css("font-size", "12px");
+     $(".twitter-timeline").contents().find(".inline-media").css("display", "none");
+     $(".twitter-timeline").contents().find(".tweet").css("font-size", "12px");
+     $(".twitter-timeline").contents().find(".p-name.customisable-highlight").css("font-size", "12px");*/
+	 $(".twitter-timeline").contents().find(".timeline-Tweet-media").css("display", "none");
+	 //$(".twitter-timeline").contents().find(".timeline-Tweet-metadata").css("display", "none");
+	 //$(".twitter-timeline").contents().find(".timeline-Tweet-actions").css("display", "none");
+	 	 
+	 
+	 
+ }, 1500);
+</script>
+<style>
+.timeline-Tweet-media { display:none !important;}
+</style>
+    </div>
+	
+  </div>
+  
+{% endblock %}
